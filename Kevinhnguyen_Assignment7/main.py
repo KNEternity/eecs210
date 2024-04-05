@@ -29,15 +29,33 @@ def printGCD(intA, intB):
 def bezoutGCD(integerA, integerB):
     x = max(integerA, integerB)
     y = min(integerA, integerB)
+    bezoutLines = []
+    substitutions = {}
     while y != 0:
         r = x % y 
-        divides = x//y 
-        print("%s = %s * %s + %s " % (x, y, divides, r))
-        x = y #=GCD at the end
-        y = r #=0 at the end
+        divides = x // y 
+        bezoutLines.append([x, y, divides, r])
+        if r != integerA and r != integerB and r != 0: 
+            substitutions[r] = "%s - %s * %s" % (x, divides, y)
 
-    print(y) 
+        print("%s = %s * %s + %s" % (x, y, divides, r))
+        x = y  # Update x to y
+        y = r  # Update y to remainder
     
+    gcd = x
+        
+    print("\nBackward steps:")
+    s, t = 0, 1
+    for i in range(len(bezoutLines) - 1, 0, -1):
+        a, b, q, _ = bezoutLines[i]
+        a_next, b_next, _, _ = bezoutLines[i - 1]
+        s, t = t, s - q * t
+        print(f"{gcd} = {a_next} - {q} * ({a})")
+
+    
+    print(bezoutLines)
+    print(substitutions)
+
 
 
 def main():
