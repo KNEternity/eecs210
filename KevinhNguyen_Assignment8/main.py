@@ -27,7 +27,7 @@ class Graph:
         Input: none
         Output: boolean
         """
-        for vertex in self.graph: 
+        for vertex in self.graph: #check if every vertex has even degree
             if len(self.graph[vertex]) % 2 != 0:
                 return False
         return True 
@@ -41,7 +41,7 @@ class Graph:
         if not self.is_euler_circuit(): 
             print("euler circuit not possible")
             print("Odd Vertexes:")
-            for vertex in self.graph:
+            for vertex in self.graph: #pick out odd vertexes
                 if len(self.graph[vertex]) % 2 != 0: 
                     print(vertex)
             return 
